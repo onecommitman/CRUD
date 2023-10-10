@@ -2,34 +2,33 @@ package web.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import web.dao.UserRepository;
+import org.springframework.transaction.annotation.Transactional;
+import web.dao.UserDao;
 import web.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
-
-    private UserRepository repository;
 
     public UserServiceImpl() {
 
     }
 
     @Autowired
-    public UserServiceImpl(UserRepository repository) {
+    public UserServiceImpl(UserDao userDao) {
         super();
-        this.repository = repository;
+        this.userDao = userDao;
     }
 
-    /*@Autowired
-    private UserDao userDao;*/
+    private UserDao userDao;
 
 
     public boolean saveUser(String name, String lastName, byte age) {
         try {
-            repository.save(new User(name, lastName, age));
+            userDao.create(new User(name, lastName, age));
             System.out.println("User с именем – " + name + " добавлен в базу данных");
             return true;
         }catch(Exception ex) {
@@ -41,7 +40,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean removeUserById(Long id) {
         try {
-            repository.deleteById(id);
+            userDao.deleteUser(id);
             return true;
         }catch(Exception ex) {
             return false;
@@ -50,14 +49,14 @@ public class UserServiceImpl implements UserService {
 
     public List<User> getAllUsers() {
         List users = new ArrayList();
-        repository.findAll().forEach(e -> users.add(e));
+        userDao.getAllUsers().forEach(e -> users.add(e));
         return users;
     }
 
     @Override
     public User getUserByID(Long id) {
-        User user = repository.findById(id).get();
-        return user;
+        //User user = repository.findById(id).get();
+        return null;
     }
 
     @Override
