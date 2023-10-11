@@ -20,7 +20,6 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-//@EnableJpaRepositories("web.dao")
 @PropertySource("classpath:db.properties")
 @ComponentScan(value = "web") //ищет компоненты в данной папке
 public class DatabaseConfig {
