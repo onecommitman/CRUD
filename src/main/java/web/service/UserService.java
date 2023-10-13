@@ -6,14 +6,14 @@ import java.util.List;
 
 public interface UserService {
 
-    boolean saveUser(String name, String lastName, byte age);
+    void saveUser(User user);
 
-    boolean removeUserById(Long id);
+    void deleteUserById(Long id);
 
     List<User> getAllUsers();
 
     User getUserByID(Long id);
 
-    boolean updateUser(int id, User user);
+    void updateUser(Long id, User user);
 
 }

@@ -6,11 +6,6 @@
 </head>
 <body>
 
-<!--
-<a th:text="${user.getId}" >VALUE</a>
-<a th:text="${user.getName}">VALUE</a>
--->
-
 <form th:method="PATCH" th:action="@{/users/edit?id={id}(id=${user.getId()})}" th:object="${user}">
 
     <label for="name">Name: </label>

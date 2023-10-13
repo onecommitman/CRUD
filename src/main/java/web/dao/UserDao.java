@@ -4,19 +4,17 @@ import web.model.User;
 
 import java.util.List;
 
-public interface UserDao{
+public interface UserDao {
 
     void create(User user);
+
     List<User> getAllUsers();
 
-    //User getUserById(Long id);
+    User getUserById(Long id);
 
-    User updateUser(Long id);
+    void updateUser(Long id, User user);
 
-    User deleteUser(Long id);
-
-
-
+    void deleteUser(Long id);
 
 
 }

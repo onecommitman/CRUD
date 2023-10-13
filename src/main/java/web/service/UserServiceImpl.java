@@ -26,25 +26,13 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
 
-    public boolean saveUser(String name, String lastName, byte age) {
-        try {
-            userDao.create(new User(name, lastName, age));
-            System.out.println("User с именем – " + name + " добавлен в базу данных");
-            return true;
-        }catch(Exception ex) {
-            return false;
-        }
-
+    public void saveUser(User user) {
+        userDao.create(user);
     }
 
     @Override
-    public boolean removeUserById(Long id) {
-        try {
-            userDao.deleteUser(id);
-            return true;
-        }catch(Exception ex) {
-            return false;
-        }
+    public void deleteUserById(Long id) {
+        userDao.deleteUser(id);
     }
 
     public List<User> getAllUsers() {
@@ -55,14 +43,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserByID(Long id) {
-        //User user = repository.findById(id).get();
-        return null;
+        User user = userDao.getUserById(id);
+        return user;
     }
 
     @Override
-    public boolean updateUser(int id, User user) {
-        //userDao.updateUser(id, user);
-        return true;
+    public void updateUser(Long id, User user) {
+        userDao.updateUser(id, user);
     }
 
 }
