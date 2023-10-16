@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Entity;
+import javax.validation.constraints.*;
 
 
 @Table(name = "users")
@@ -17,12 +18,20 @@ public class User {
     private Integer id;
 
     @Column(name = "name")
+    @NotEmpty(message = "Name shouldn't be empty")
+    @Pattern(regexp = "^[A-Za-zА-Яа-яЁё]+$", message = "The name must consist of letters only!")
+    @Size(min = 2, max = 30, message = "The name should be between 2 and 30 characters")
     private String name;
 
     @Column(name = "lastName")
+    @NotEmpty(message = "Surname shouldn't be empty")
+    @Pattern(regexp = "^[A-Za-zА-Яа-яЁё]+$", message = "The surname must consist of letters only!")
+    @Size(min = 2, max = 30, message = "The surname should be between 2 and 30 characters")
     private String lastName;
 
     @Column(name = "age")
+    @NotNull(message = "Shouldn't be empty!")
+    @Min(value = 18, message = "Must be over 18 years of age!")
     private Byte age;
 
     public User() {

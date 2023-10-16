@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 import web.dao.UserDao;
 import web.model.User;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -35,13 +34,13 @@ public class UserServiceImpl implements UserService {
         userDao.deleteUser(id);
     }
 
+    @Transactional(readOnly = true)
     public List<User> getAllUsers() {
-        List users = new ArrayList();
-        userDao.getAllUsers().forEach(e -> users.add(e));
-        return users;
+        return userDao.getAllUsers();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public User getUserByID(Long id) {
         User user = userDao.getUserById(id);
         return user;
